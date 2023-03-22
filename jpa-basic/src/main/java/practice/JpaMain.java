@@ -12,14 +12,14 @@ public class JpaMain {
     public static void main(String[] args) {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hello");
         // jpa에서 데이터를 변경하는 모든 task는 트랜잭션 안에서 이루어져야 한다.
-        save(entityManagerFactory, sampleDate(1L, "dog"));
-        save(entityManagerFactory, sampleDate(2L, "cat"));
+        save(entityManagerFactory, sampleData(1L, "dog"));
+        save(entityManagerFactory, sampleData(2L, "cat"));
         update(entityManagerFactory, Member.class, 1L);
         remove(entityManagerFactory, Member.class, 2L);
         entityManagerFactory.close();
     }
 
-    private static Member sampleDate(Long id, String name) {
+    private static Member sampleData(Long id, String name) {
         return new Member(id, name);
     }
 
