@@ -37,7 +37,7 @@ public class JpaMain {
         }
     }
 
-    private static <T> void update(EntityManagerFactory entityManagerFactory, Class<T> type, Long primaryKey) {
+    private static <T> void update(EntityManagerFactory entityManagerFactory, Class<T> type, Object primaryKey) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
@@ -61,7 +61,7 @@ public class JpaMain {
         }
     }
 
-    private static <T> void remove(EntityManagerFactory entityManagerFactory, Class<T> type, Long primaryKey) {
+    private static <T> void remove(EntityManagerFactory entityManagerFactory, Class<T> type, Object primaryKey) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
