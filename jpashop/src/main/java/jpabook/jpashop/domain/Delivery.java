@@ -21,4 +21,6 @@ public class Delivery {
     public void setOrder(Order order) {
         this.order = order;
     }
+
+    public void setAddress(Address address) { this.address = address; }
 }
