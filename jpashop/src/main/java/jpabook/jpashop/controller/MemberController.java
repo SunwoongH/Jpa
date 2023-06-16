@@ -1,7 +1,5 @@
 package jpabook.jpashop.controller;
 
-import jpabook.jpashop.domain.Address;
-import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -30,15 +28,7 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             return "members/create-member-form";
         }
-        Member member = Member.builder()
-                .name(memberForm.getName())
-                .address(Address.builder()
-                        .city(memberForm.getCity())
-                        .street(memberForm.getStreet())
-                        .zipcode(memberForm.getZipcode())
-                        .build())
-                .build();
-        memberService.join(member);
+        memberService.join(memberForm.toEntity());
         return "redirect:/";
     }
 
