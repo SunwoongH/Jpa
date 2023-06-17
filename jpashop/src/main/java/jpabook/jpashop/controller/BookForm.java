@@ -1,6 +1,8 @@
 package jpabook.jpashop.controller;
 
-import jpabook.jpashop.domain.item.Book;
+import jpabook.jpashop.dto.ItemResponseDto;
+import jpabook.jpashop.dto.SaveItemDto;
+import jpabook.jpashop.dto.UpdateItemDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,25 +29,32 @@ public class BookForm {
         this.isbn = isbn;
     }
 
-    public Book toEntity() {
-        Book book = Book.builder()
+    public SaveItemDto toSaveItemDto() {
+        return SaveItemDto.builder()
+                .name(name)
+                .price(price)
+                .stockQuantity(stockQuantity)
                 .author(author)
                 .isbn(isbn)
                 .build();
-        book.setName(name);
-        book.setPrice(price);
-        book.setStockQuantity(stockQuantity);
-        return book;
     }
 
-    public static BookForm of(Book book) {
+    public UpdateItemDto toUpdateItemDto() {
+        return UpdateItemDto.builder()
+                .name(name)
+                .price(price)
+                .stockQuantity(stockQuantity)
+                .build();
+    }
+
+    public static BookForm of(ItemResponseDto itemResponseDto) {
         return BookForm.builder()
-                .id(book.getId())
-                .name(book.getName())
-                .price(book.getPrice())
-                .stockQuantity(book.getStockQuantity())
-                .author(book.getAuthor())
-                .isbn(book.getIsbn())
+                .id(itemResponseDto.getId())
+                .name(itemResponseDto.getName())
+                .price(itemResponseDto.getPrice())
+                .stockQuantity(itemResponseDto.getStockQuantity())
+                .author(itemResponseDto.getAuthor())
+                .isbn(itemResponseDto.getIsbn())
                 .build();
     }
 }
