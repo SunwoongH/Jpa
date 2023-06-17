@@ -1,6 +1,5 @@
 package jpabook.jpashop.controller;
 
-import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,7 +23,7 @@ public class BookController {
 
     @PostMapping("/new")
     public String create(BookForm bookForm) {
-        itemService.saveItem(bookForm.toEntity());
+        itemService.saveItem(bookForm.toSaveItemDto());
         return "redirect:/";
     }
 
@@ -36,13 +35,13 @@ public class BookController {
 
     @GetMapping("/{itemId}/edit")
     public String updateForm(@PathVariable Long itemId, Model model) {
-        model.addAttribute("itemForm", BookForm.of((Book) itemService.findOne(itemId)));
+        model.addAttribute("itemForm", BookForm.of(itemService.findOne(itemId)));
         return "items/update-item-form";
     }
 
     @PostMapping("/{itemId}/edit")
     public String update(@PathVariable Long itemId, BookForm bookForm) {
-        itemService.saveItem(bookForm.toEntity());
+        itemService.updateItem(itemId, bookForm.toUpdateItemDto());
         return "redirect:/items";
     }
 }
