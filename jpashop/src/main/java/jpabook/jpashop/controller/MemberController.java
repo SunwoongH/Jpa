@@ -28,7 +28,7 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             return "members/create-member-form";
         }
-        memberService.join(memberForm.toEntity());
+        memberService.join(memberForm.toJoinMemberDto());
         return "redirect:/";
     }
 

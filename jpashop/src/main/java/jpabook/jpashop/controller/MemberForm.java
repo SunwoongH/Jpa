@@ -1,7 +1,6 @@
 package jpabook.jpashop.controller;
 
-import jpabook.jpashop.domain.Address;
-import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.dto.JoinMemberDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,14 +26,12 @@ public class MemberForm {
         this.zipcode = zipcode;
     }
 
-    public Member toEntity() {
-        return Member.builder()
+    public JoinMemberDto toJoinMemberDto() {
+        return JoinMemberDto.builder()
                 .name(name)
-                .address(Address.builder()
-                        .city(city)
-                        .street(street)
-                        .zipcode(zipcode)
-                        .build())
+                .city(city)
+                .street(street)
+                .zipcode(zipcode)
                 .build();
     }
 }

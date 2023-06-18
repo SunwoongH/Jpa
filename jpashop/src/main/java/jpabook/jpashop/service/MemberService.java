@@ -1,6 +1,7 @@
 package jpabook.jpashop.service;
 
 import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.dto.JoinMemberDto;
 import jpabook.jpashop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,8 @@ public class MemberService {
      * 회원 가입
      */
     @Transactional
-    public Long join(Member member) {
+    public Long join(JoinMemberDto joinMemberDto) {
+        Member member = joinMemberDto.toEntity();
         validateDuplicateMember(member);
         memberRepository.save(member);
         return member.getId();
