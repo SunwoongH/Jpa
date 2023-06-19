@@ -46,7 +46,7 @@ public class OrderRepository {
             } else {
                 jpql += " and";
             }
-            jpql += "m.name like :name";
+            jpql += " m.name like :name";
         }
         TypedQuery<Order> query = entityManager.createQuery(jpql, Order.class)
                 .setMaxResults(1000); // 최대 1000건으로 제한
