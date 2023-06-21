@@ -1,8 +1,8 @@
 package jpabook.jpashop.controller;
 
-import jpabook.jpashop.dto.ItemResponseDto;
-import jpabook.jpashop.dto.SaveItemDto;
-import jpabook.jpashop.dto.UpdateItemDto;
+import jpabook.jpashop.dto.response.ItemResponseDto;
+import jpabook.jpashop.dto.request.SaveItemRequestDto;
+import jpabook.jpashop.dto.request.UpdateItemRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,8 +29,8 @@ public class BookForm {
         this.isbn = isbn;
     }
 
-    public SaveItemDto toSaveItemDto() {
-        return SaveItemDto.builder()
+    public SaveItemRequestDto toSaveItemDto() {
+        return SaveItemRequestDto.builder()
                 .name(name)
                 .price(price)
                 .stockQuantity(stockQuantity)
@@ -39,8 +39,8 @@ public class BookForm {
                 .build();
     }
 
-    public UpdateItemDto toUpdateItemDto() {
-        return UpdateItemDto.builder()
+    public UpdateItemRequestDto toUpdateItemDto() {
+        return UpdateItemRequestDto.builder()
                 .name(name)
                 .price(price)
                 .stockQuantity(stockQuantity)
