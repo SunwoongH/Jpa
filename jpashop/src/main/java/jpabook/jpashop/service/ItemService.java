@@ -1,9 +1,9 @@
 package jpabook.jpashop.service;
 
 import jpabook.jpashop.domain.item.Item;
-import jpabook.jpashop.dto.ItemResponseDto;
-import jpabook.jpashop.dto.SaveItemDto;
-import jpabook.jpashop.dto.UpdateItemDto;
+import jpabook.jpashop.dto.response.ItemResponseDto;
+import jpabook.jpashop.dto.request.SaveItemRequestDto;
+import jpabook.jpashop.dto.request.UpdateItemRequestDto;
 import jpabook.jpashop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class ItemService {
      * 상품 등록
      */
     @Transactional
-    public void saveItem(SaveItemDto saveItemDto) {
+    public void saveItem(SaveItemRequestDto saveItemDto) {
         itemRepository.save(saveItemDto.toBookEntity());
     }
 
@@ -29,7 +29,7 @@ public class ItemService {
      * 상품 수정
      */
     @Transactional
-    public void updateItem(Long id, UpdateItemDto updateItemDto) {
+    public void updateItem(Long id, UpdateItemRequestDto updateItemDto) {
         Item item = itemRepository.findOne(id);
         item.update(updateItemDto.getName(), updateItemDto.getPrice(), updateItemDto.getStockQuantity());
     }
