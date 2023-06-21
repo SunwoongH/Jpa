@@ -1,4 +1,4 @@
-package jpabook.jpashop.dto;
+package jpabook.jpashop.dto.request;
 
 import jpabook.jpashop.domain.item.Book;
 import lombok.Builder;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SaveItemDto {
+public class SaveItemRequestDto {
     private String name;
     private int price;
     private int stockQuantity;
@@ -15,7 +15,7 @@ public class SaveItemDto {
     private String isbn;
 
     @Builder
-    public SaveItemDto(String name, int price, int stockQuantity, String author, String isbn) {
+    public SaveItemRequestDto(String name, int price, int stockQuantity, String author, String isbn) {
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;

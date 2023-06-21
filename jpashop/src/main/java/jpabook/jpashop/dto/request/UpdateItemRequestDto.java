@@ -1,4 +1,4 @@
-package jpabook.jpashop.dto;
+package jpabook.jpashop.dto.request;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,13 +6,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UpdateItemDto {
+public class UpdateItemRequestDto {
     private String name;
     private int price;
     private int stockQuantity;
 
     @Builder
-    public UpdateItemDto(String name, int price, int stockQuantity) {
+    public UpdateItemRequestDto(String name, int price, int stockQuantity) {
         this.name = name;
         this.price = price;
         this.stockQuantity = stockQuantity;
