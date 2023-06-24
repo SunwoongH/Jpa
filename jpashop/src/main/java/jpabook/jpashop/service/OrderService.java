@@ -5,6 +5,7 @@ import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.item.Item;
+import jpabook.jpashop.dto.response.FindOrderResponseDto;
 import jpabook.jpashop.repository.ItemRepository;
 import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.repository.OrderRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -56,9 +58,19 @@ public class OrderService {
     }
 
     /**
-     * 주문 검색
+     * 주문 조회 - API
      */
-    public List<Order> findOrders(OrderSearch orderSearch) {
-        return orderRepository.findAllByCriteria(orderSearch);
+    public List<FindOrderResponseDto> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByCriteria(orderSearch)
+                .stream()
+                .map(FindOrderResponseDto::of)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 주문 조회 - Thymeleaf
+     */
+    public List<Order> findOrdersForView(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch);
     }
 }
