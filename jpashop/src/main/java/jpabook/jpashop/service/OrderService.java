@@ -68,6 +68,16 @@ public class OrderService {
     }
 
     /**
+     * 주문 조회 - API fetch join
+     */
+    public List<FindOrderResponseDto> findOrdersByFetchJoin() {
+        return orderRepository.findAllWithMemberDelivery()
+                .stream()
+                .map(FindOrderResponseDto::of)
+                .collect(Collectors.toList());
+    }
+
+    /**
      * 주문 조회 - Thymeleaf
      */
     public List<Order> findOrdersForView(OrderSearch orderSearch) {

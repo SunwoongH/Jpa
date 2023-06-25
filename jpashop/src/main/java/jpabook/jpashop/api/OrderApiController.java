@@ -19,6 +19,6 @@ public class OrderApiController {
 
     @GetMapping
     public ApiResponse<List<FindOrderResponseDto>> orders() {
-        return ApiResponse.of(orderService.findOrders(new OrderSearch()));
+        return ApiResponse.of(orderService.findOrdersByFetchJoin());
     }
 }
