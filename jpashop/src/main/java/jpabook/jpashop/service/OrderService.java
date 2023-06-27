@@ -6,6 +6,7 @@ import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.dto.response.FindOrderResponseDto;
+import jpabook.jpashop.dto.response.FindSimpleOrderResponseDto;
 import jpabook.jpashop.repository.ItemRepository;
 import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.repository.OrderRepository;
@@ -63,6 +64,13 @@ public class OrderService {
     /**
      * 주문 조회 - API
      */
+    public List<FindSimpleOrderResponseDto> findSimpleOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch)
+                .stream()
+                .map(FindSimpleOrderResponseDto::of)
+                .collect(Collectors.toList());
+    }
+
     public List<FindOrderResponseDto> findOrders(OrderSearch orderSearch) {
         return orderRepository.findAllByCriteria(orderSearch)
                 .stream()
@@ -73,8 +81,15 @@ public class OrderService {
     /**
      * 주문 조회 - API fetch join
      */
-    public List<FindOrderResponseDto> findOrdersByFetchJoin() {
+    public List<FindSimpleOrderResponseDto> findSimpleOrdersByFetchJoin() {
         return orderRepository.findAllWithMemberDelivery()
+                .stream()
+                .map(FindSimpleOrderResponseDto::of)
+                .collect(Collectors.toList());
+    }
+
+    public List<FindOrderResponseDto> findOrdersByFetchJoin() {
+        return orderRepository.findAllWithItems()
                 .stream()
                 .map(FindOrderResponseDto::of)
                 .collect(Collectors.toList());
