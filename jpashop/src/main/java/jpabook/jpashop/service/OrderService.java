@@ -89,7 +89,14 @@ public class OrderService {
     }
 
     public List<FindOrderResponseDto> findOrdersByFetchJoin() {
-        return orderRepository.findAllWithItems()
+        return orderRepository.findAllWithMemberDelivery()
+                .stream()
+                .map(FindOrderResponseDto::of)
+                .collect(Collectors.toList());
+    }
+
+    public List<FindOrderResponseDto> findOrdersByOptimizeFetchJoin(int offset, int limit) {
+        return orderRepository.findAllWithMemberDelivery(offset, limit)
                 .stream()
                 .map(FindOrderResponseDto::of)
                 .collect(Collectors.toList());
