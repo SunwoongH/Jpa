@@ -11,7 +11,7 @@ import java.util.List;
 public class OrderSimpleQueryRepository {
     private final EntityManager entityManager;
 
-    public List<FindSimpleOrderQueryDto> findOrderQueryDtos() {
+    public List<FindSimpleOrderQueryDto> findSimpleOrderQueryDtos() {
         return entityManager.createQuery(
                         "select new jpabook.jpashop.repository.simplequery.FindSimpleOrderQueryDto(o.id, m.name, o.orderDate, o.status, d.address)" +
                                 " from Order o" +
