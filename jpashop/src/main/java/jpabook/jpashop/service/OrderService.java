@@ -11,6 +11,8 @@ import jpabook.jpashop.repository.ItemRepository;
 import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
+import jpabook.jpashop.repository.query.FindOrderQueryDto;
+import jpabook.jpashop.repository.query.OrderQueryRepository;
 import jpabook.jpashop.repository.simplequery.FindSimpleOrderQueryDto;
 import jpabook.jpashop.repository.simplequery.OrderSimpleQueryRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +29,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
-    private final OrderSimpleQueryRepository orderQueryRepository;
+    private final OrderSimpleQueryRepository orderSimpleQueryRepository;
+    private final OrderQueryRepository orderQueryRepository;
 
     /**
      * 주문
@@ -105,8 +108,12 @@ public class OrderService {
     /**
      * 주문 조회 - API JPA에서 DTO 바로 조회
      */
-    public List<FindSimpleOrderQueryDto> findOrderQueryDtos() {
-        return orderQueryRepository.findOrderQueryDtos();
+    public List<FindSimpleOrderQueryDto> findSimpleOrderQueryDtos() {
+        return orderSimpleQueryRepository.findSimpleOrderQueryDtos();
+    }
+
+    public List<FindOrderQueryDto> findOrderQueryDtos() {
+        return orderQueryRepository.findOrderQueryDtosWithOrderItemQueryDto();
     }
 
     /**

@@ -3,6 +3,7 @@ package jpabook.jpashop.api;
 import jpabook.jpashop.dto.ApiResponse;
 import jpabook.jpashop.dto.response.FindOrderResponseDto;
 import jpabook.jpashop.dto.response.FindSimpleOrderResponseDto;
+import jpabook.jpashop.repository.query.FindOrderQueryDto;
 import jpabook.jpashop.repository.simplequery.FindSimpleOrderQueryDto;
 import jpabook.jpashop.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class OrderApiController {
 
     @GetMapping("/v2/simple/orders")
     public ResponseEntity<ApiResponse<List<FindSimpleOrderQueryDto>>> findSimpleOrdersByQueryDtos() {
-        return ResponseEntity.ok(ApiResponse.of(orderService.findOrderQueryDtos()));
+        return ResponseEntity.ok(ApiResponse.of(orderService.findSimpleOrderQueryDtos()));
     }
 
     @GetMapping("/v1/orders")
@@ -40,5 +41,10 @@ public class OrderApiController {
             @RequestParam(value = "offset", defaultValue = "0") final int offset,
             @RequestParam(value = "limit", defaultValue = "100") final int limit) {
         return ResponseEntity.ok(ApiResponse.of(orderService.findOrdersByOptimizeFetchJoin(offset, limit)));
+    }
+
+    @GetMapping("/v3/orders")
+    public ResponseEntity<ApiResponse<List<FindOrderQueryDto>>> findOrdersQueryDtos() {
+        return ResponseEntity.ok(ApiResponse.of(orderService.findOrderQueryDtos()));
     }
 }
