@@ -3,7 +3,7 @@ package jpabook.jpashop.api;
 import jpabook.jpashop.dto.ApiResponse;
 import jpabook.jpashop.dto.response.FindOrderResponseDto;
 import jpabook.jpashop.dto.response.FindSimpleOrderResponseDto;
-import jpabook.jpashop.repository.query.FindOrderQueryDto;
+import jpabook.jpashop.repository.simplequery.FindSimpleOrderQueryDto;
 import jpabook.jpashop.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public class OrderApiController {
     }
 
     @GetMapping("/v2/simple/orders")
-    public ResponseEntity<ApiResponse<List<FindOrderQueryDto>>> findSimpleOrdersByQueryDtos() {
+    public ResponseEntity<ApiResponse<List<FindSimpleOrderQueryDto>>> findSimpleOrdersByQueryDtos() {
         return ResponseEntity.ok(ApiResponse.of(orderService.findOrderQueryDtos()));
     }
 
