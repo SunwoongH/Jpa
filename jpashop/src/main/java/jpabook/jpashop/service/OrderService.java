@@ -116,6 +116,10 @@ public class OrderService {
         return orderQueryRepository.findOrderQueryDtosWithOrderItemQueryDto();
     }
 
+    public List<FindOrderQueryDto> findOptimizeOrderQueryDtos() {
+        return orderQueryRepository.findOrdersQueryDtosWithOptimizeOrderItemQueryDto();
+    }
+
     /**
      * 주문 조회 - Thymeleaf
      */

@@ -47,4 +47,9 @@ public class OrderApiController {
     public ResponseEntity<ApiResponse<List<FindOrderQueryDto>>> findOrdersQueryDtos() {
         return ResponseEntity.ok(ApiResponse.of(orderService.findOrderQueryDtos()));
     }
+
+    @GetMapping("/v4/orders")
+    public ResponseEntity<ApiResponse<List<FindOrderQueryDto>>> findOptimizeOrdersQueryDtos() {
+        return ResponseEntity.ok(ApiResponse.of(orderService.findOptimizeOrderQueryDtos()));
+    }
 }
