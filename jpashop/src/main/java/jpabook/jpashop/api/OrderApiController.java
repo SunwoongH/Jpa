@@ -4,6 +4,7 @@ import jpabook.jpashop.dto.ApiResponse;
 import jpabook.jpashop.dto.response.FindOrderResponseDto;
 import jpabook.jpashop.dto.response.FindSimpleOrderResponseDto;
 import jpabook.jpashop.repository.query.FindOrderQueryDto;
+import jpabook.jpashop.repository.query.OrderFlatQueryDto;
 import jpabook.jpashop.repository.simplequery.FindSimpleOrderQueryDto;
 import jpabook.jpashop.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -51,5 +52,10 @@ public class OrderApiController {
     @GetMapping("/v4/orders")
     public ResponseEntity<ApiResponse<List<FindOrderQueryDto>>> findOptimizeOrdersQueryDtos() {
         return ResponseEntity.ok(ApiResponse.of(orderService.findOptimizeOrderQueryDtos()));
+    }
+
+    @GetMapping("/v5/orders")
+    public ResponseEntity<ApiResponse<List<OrderFlatQueryDto>>> findOrderFlatQueryDtos() {
+        return ResponseEntity.ok(ApiResponse.of(orderService.findOrderFlatQueryDtos()));
     }
 }

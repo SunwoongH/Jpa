@@ -12,6 +12,7 @@ import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
 import jpabook.jpashop.repository.query.FindOrderQueryDto;
+import jpabook.jpashop.repository.query.OrderFlatQueryDto;
 import jpabook.jpashop.repository.query.OrderQueryRepository;
 import jpabook.jpashop.repository.simplequery.FindSimpleOrderQueryDto;
 import jpabook.jpashop.repository.simplequery.OrderSimpleQueryRepository;
@@ -118,6 +119,10 @@ public class OrderService {
 
     public List<FindOrderQueryDto> findOptimizeOrderQueryDtos() {
         return orderQueryRepository.findOrdersQueryDtosWithOptimizeOrderItemQueryDto();
+    }
+
+    public List<OrderFlatQueryDto> findOrderFlatQueryDtos() {
+        return orderQueryRepository.findOrderFlatQueryDtos();
     }
 
     /**

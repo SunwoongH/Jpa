@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.groupingBy;
+
 @RequiredArgsConstructor
 @Repository
 public class OrderQueryRepository {
@@ -29,6 +31,17 @@ public class OrderQueryRepository {
         Map<Long, List<OrderItemQueryDto>> orderItemQueryDtoMap = createOrderItemQueryDtoMap(orderItemQueryDtos);
         findOrderQueryDtos.forEach(order -> order.setOrderItems(orderItemQueryDtoMap.get(order.getOrderId())));
         return findOrderQueryDtos;
+    }
+
+    public List<OrderFlatQueryDto> findOrderFlatQueryDtos() {
+        return entityManager.createQuery(
+                "select new jpabook.jpashop.repository.query.OrderFlatQueryDto(o.id, m.name, o.orderDate, o.status, d.address, i.name, oi.orderPrice, oi.count)" +
+                        " from Order o" +
+                        " join o.member m" +
+                        " join o.delivery d" +
+                        " join o.orderItems oi" +
+                        " join oi.item i", OrderFlatQueryDto.class
+        ).getResultList();
     }
 
     public List<FindOrderQueryDto> findOrdersQueryDtos() {
@@ -67,6 +80,6 @@ public class OrderQueryRepository {
 
     private Map<Long, List<OrderItemQueryDto>> createOrderItemQueryDtoMap(List<OrderItemQueryDto> orderItemQueryDtos) {
         return orderItemQueryDtos.stream()
-                .collect(Collectors.groupingBy(OrderItemQueryDto::getOrderId));
+                .collect(groupingBy(OrderItemQueryDto::getOrderId));
     }
 }
