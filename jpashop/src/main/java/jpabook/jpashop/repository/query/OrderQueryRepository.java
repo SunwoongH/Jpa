@@ -33,6 +33,21 @@ public class OrderQueryRepository {
         return findOrderQueryDtos;
     }
 
+    public List<FindOrderQueryDto> findOrderQueryDtosWithOrderFlatQueryDto() {
+        List<OrderFlatQueryDto> orderFlatQueryDtos = findOrderFlatQueryDtos();
+        Map<FindOrderQueryDto, List<OrderItemQueryDto>> findOrderQueryDtoMap = orderFlatQueryDtos.stream()
+                .collect(groupingBy(orderFlatQueryDto ->
+                                new FindOrderQueryDto(orderFlatQueryDto.getOrderId(), orderFlatQueryDto.getName(), orderFlatQueryDto.getOrderDate(),
+                                        orderFlatQueryDto.getOrderStatus(), orderFlatQueryDto.getAddress()),
+                        Collectors.mapping(orderFlatQueryDto ->
+                                new OrderItemQueryDto(orderFlatQueryDto.getOrderId(), orderFlatQueryDto.getItemName(), orderFlatQueryDto.getOrderPrice(),
+                                        orderFlatQueryDto.getCount()), Collectors.toList())));
+        return findOrderQueryDtoMap.entrySet().stream()
+                .map(entry -> new FindOrderQueryDto(entry.getKey().getOrderId(), entry.getKey().getName(), entry.getKey().getOrderDate(),
+                        entry.getKey().getOrderStatus(), entry.getKey().getAddress(), entry.getValue()))
+                .collect(Collectors.toList());
+    }
+
     public List<OrderFlatQueryDto> findOrderFlatQueryDtos() {
         return entityManager.createQuery(
                 "select new jpabook.jpashop.repository.query.OrderFlatQueryDto(o.id, m.name, o.orderDate, o.status, d.address, i.name, oi.orderPrice, oi.count)" +

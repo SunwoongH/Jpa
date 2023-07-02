@@ -58,4 +58,9 @@ public class OrderApiController {
     public ResponseEntity<ApiResponse<List<OrderFlatQueryDto>>> findOrderFlatQueryDtos() {
         return ResponseEntity.ok(ApiResponse.of(orderService.findOrderFlatQueryDtos()));
     }
+
+    @GetMapping("/v6/orders")
+    public ResponseEntity<ApiResponse<List<FindOrderQueryDto>>> findOrderQueryDtosWithOrderFlatQueryDto() {
+        return ResponseEntity.ok(ApiResponse.of(orderService.findOrderQueryDtosWithOrderFlatQueryDto()));
+    }
 }
