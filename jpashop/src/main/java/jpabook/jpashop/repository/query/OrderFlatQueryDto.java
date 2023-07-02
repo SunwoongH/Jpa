@@ -2,12 +2,10 @@ package jpabook.jpashop.repository.query;
 
 import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.OrderStatus;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@EqualsAndHashCode(of = "orderId")
 @Getter
 public class OrderFlatQueryDto {
     private Long orderId;
