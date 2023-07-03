@@ -6,7 +6,7 @@ import jpabook.jpashop.dto.request.UpdateMemberRequestDto;
 import jpabook.jpashop.dto.response.FindMemberResponseDto;
 import jpabook.jpashop.dto.response.JoinMemberResponseDto;
 import jpabook.jpashop.dto.response.UpdateMemberResponseDto;
-import jpabook.jpashop.repository.MemberOriginalJpaRepository;
+import jpabook.jpashop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 @Service
 public class MemberService {
-    private final MemberOriginalJpaRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     /**
      * 회원 가입
@@ -36,7 +36,8 @@ public class MemberService {
      */
     @Transactional
     public UpdateMemberResponseDto update(Long id, UpdateMemberRequestDto updateMemberDto) {
-        Member member = memberRepository.findOne(id);
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("id = " + id + " 회원이 존재하지 않습니다."));
         member.setName(updateMemberDto.getName());
         return UpdateMemberResponseDto.of(member);
     }
@@ -45,7 +46,9 @@ public class MemberService {
      * 회원 조회
      */
     public FindMemberResponseDto findMember(Long id) {
-        return FindMemberResponseDto.of(memberRepository.findOne(id));
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("id = " + id + " 회원이 존재하지 않습니다."));
+        return FindMemberResponseDto.of(member);
     }
 
     /**
