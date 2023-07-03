@@ -9,7 +9,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-public class MemberRepository {
+public class MemberOriginalJpaRepository {
     private final EntityManager entityManager;
 
     public void save(Member member) {

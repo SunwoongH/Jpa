@@ -8,7 +8,7 @@ import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.dto.response.FindOrderResponseDto;
 import jpabook.jpashop.dto.response.FindSimpleOrderResponseDto;
 import jpabook.jpashop.repository.ItemRepository;
-import jpabook.jpashop.repository.MemberRepository;
+import jpabook.jpashop.repository.MemberOriginalJpaRepository;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
 import jpabook.jpashop.repository.query.FindOrderQueryDto;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
-    private final MemberRepository memberRepository;
+    private final MemberOriginalJpaRepository memberRepository;
     private final ItemRepository itemRepository;
     private final OrderSimpleQueryRepository orderSimpleQueryRepository;
     private final OrderQueryRepository orderQueryRepository;

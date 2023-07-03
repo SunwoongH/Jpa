@@ -6,7 +6,7 @@ import jpabook.jpashop.dto.request.UpdateMemberRequestDto;
 import jpabook.jpashop.dto.response.FindMemberResponseDto;
 import jpabook.jpashop.dto.response.JoinMemberResponseDto;
 import jpabook.jpashop.dto.response.UpdateMemberResponseDto;
-import jpabook.jpashop.repository.MemberRepository;
+import jpabook.jpashop.repository.MemberOriginalJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 @Service
 public class MemberService {
-    private final MemberRepository memberRepository;
+    private final MemberOriginalJpaRepository memberRepository;
 
     /**
      * 회원 가입
