@@ -69,14 +69,14 @@ public class OrderService {
      * 주문 조회 - API
      */
     public List<FindSimpleOrderResponseDto> findSimpleOrders(OrderSearch orderSearch) {
-        return orderRepository.findAllByString(orderSearch)
+        return orderRepository.findAll(orderSearch)
                 .stream()
                 .map(FindSimpleOrderResponseDto::of)
                 .collect(Collectors.toList());
     }
 
     public List<FindOrderResponseDto> findOrders(OrderSearch orderSearch) {
-        return orderRepository.findAllByCriteria(orderSearch)
+        return orderRepository.findAll(orderSearch)
                 .stream()
                 .map(FindOrderResponseDto::of)
                 .collect(Collectors.toList());
@@ -133,6 +133,6 @@ public class OrderService {
      * 주문 조회 - Thymeleaf
      */
     public List<Order> findOrdersForView(OrderSearch orderSearch) {
-        return orderRepository.findAllByString(orderSearch);
+        return orderRepository.findAll(orderSearch);
     }
 }
